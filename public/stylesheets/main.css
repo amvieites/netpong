@@ -1,0 +1,48 @@
+body {
+    font-family: Impact, sans-serif;
+    font-size: medium;
+}
+
+a {
+    color: white;
+}
+
+#container {
+    width: 500px;
+    height: 500px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+#scoreboard {
+    height: 40px;
+    text-align: center;
+    font-size: 2em;
+}
+
+#ready-modal {
+    font-size: 2em;
+    color: white;
+    background-color: black;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#countdown-modal {
+    position: inherit;
+    top: 50%;
+    left: 50%;
+    margin-top: -450px;
+    margin-left: -40px;
+    font-size: 8em;
+    color: white;
+    visibility: hidden;
+}
+#canvas-wrap { position:relative; }
+#canvas-wrap canvas {  top:0; left:0; }

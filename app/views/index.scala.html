@@ -1,0 +1,52 @@
+@(gameId: String, width: Int, height: Int, ballSpeed: Int, playerSpeed: Int)
+<!DOCTYPE html>
+
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+        <title>Just Online Pong.</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="scoreboard">0 - 0</div>
+            <div id="canvas-wrap">
+                <canvas id="pong" width="@width" height="@height"></canvas>
+                <div id="ready-modal"><a href="javascript:ready()" alt="I'm ready!">Ready!</a></div>
+                <div id="countdown-modal">1</div>
+            </div>
+        </div>
+        <script src="@routes.Assets.at("javascripts/jop.js")"></script>
+        <script src="@routes.Assets.at("javascripts/jop_net.js")"></script>
+        <script>
+                function ready() {
+                    var div = document.getElementById('ready-modal');
+                    div.style.visibility = 'hidden';
+                    sendMsg('ready');
+                }
+
+                Pong.init('@gameId', @width, @height, @ballSpeed, @playerSpeed);
+                Pong.scoring = function (p1Score, p2Score) {
+                    document.getElementById("scoreboard").innerHTML = p1Score + " - " + p2Score;
+                };
+                Pong.gameEnd = function () {
+                    var div = document.getElementById('ready-modal');
+                    div.style.visibility = 'visible';
+                };
+                Pong.gameStart = function () {
+                    var div = document.getElementById('ready-modal');
+                    div.style.visibility = 'hidden';
+                };
+                Pong.countdown = function (seconds) {
+                    var div = document.getElementById('countdown-modal');
+                    div.innerText = seconds;
+                    div.style.visibility = 'visible';
+                    if (seconds === 1) {
+                        setTimeout(function (mydiv) {
+                            mydiv.style.visibility = 'hidden'
+                        }.bind(null, div), 1000);
+                    }
+                };
+        </script>
+    </body>
+</html>
